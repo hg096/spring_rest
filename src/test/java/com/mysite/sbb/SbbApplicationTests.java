@@ -1,10 +1,10 @@
-package com.luv2code.springboot.demo.mycoolapp;
+package com.mysite.sbb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MycoolappApplicationTests {
+class SbbApplicationTests {
 
 	@Test
 	void contextLoads() {
