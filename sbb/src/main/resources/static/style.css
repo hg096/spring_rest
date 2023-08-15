@@ -1,0 +1,14 @@
+
+
+
+/*
+빌드시 명령어
+npx tailwindcss build -o src/main/resources/static/styles.css
+*/
+textarea {
+  width:100%;
+}
+
+input[type=submit] {
+  margin-top:10px;
+}
