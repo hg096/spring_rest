@@ -10,9 +10,11 @@
 			</thead>
 			<tbody>
 				<tr th:each="question, loop : ${paging}">
-          <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+					<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
 					<td>
 						<a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+						<!-- 답변 표기 -->
+						<span class="text-danger small ms-2" th:if="${#lists.size(question.answerList) > 0}" th:text="${#lists.size(question.answerList)}"> </span>
 					</td>
 					<td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 				</tr>
@@ -27,10 +29,12 @@
 						<span>이전</span>
 					</a>
 				</li>
-				<li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-          th:if="${page >= paging.number-3 and page <= paging.number+3}"
-          th:classappend="${page == paging.number} ? 'active'"
-          class="page-item">
+				<li
+					th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+					th:if="${page >= paging.number-3 and page <= paging.number+3}"
+					th:classappend="${page == paging.number} ? 'active'"
+					class="page-item"
+				>
 					<a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
 				</li>
 				<li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
