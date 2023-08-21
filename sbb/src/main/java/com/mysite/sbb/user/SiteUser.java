@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+
+// http://localhost:8080/h2-console
 @Getter
 @Setter
 @Entity

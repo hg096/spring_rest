@@ -3,6 +3,7 @@ package com.mysite.sbb.answer;
 import java.time.LocalDateTime;
 
 import com.mysite.sbb.question.Question;
+import com.mysite.sbb.user.SiteUser;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +14,8 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
+
+// http://localhost:8080/h2-console
 @Getter
 @Setter
 @Entity
@@ -28,4 +31,8 @@ public class Answer {
 
   @ManyToOne
   private Question question;
+
+  // 글쓴이
+  @ManyToOne
+  private SiteUser author;
 }
