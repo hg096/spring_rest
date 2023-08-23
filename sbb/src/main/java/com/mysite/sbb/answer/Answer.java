@@ -20,6 +20,7 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Answer {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
@@ -35,4 +36,7 @@ public class Answer {
   // 글쓴이
   @ManyToOne
   private SiteUser author;
+
+  private LocalDateTime modifyDate;
+
 }
