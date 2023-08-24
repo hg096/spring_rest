@@ -44,13 +44,13 @@ public class QuestionController {
     return "question_detail";
   }
 
-  @PreAuthorize("isAuthenticated()")
+  @PreAuthorize("isAuthenticated()") // 로그인 한 사람만 가능
   @GetMapping("/create")
   public String questionCreate(QuestionForm questionForm) {
     return "question_form";
   }
 
-  @PreAuthorize("isAuthenticated()")
+  @PreAuthorize("isAuthenticated()") // 로그인 한 사람만 가능
   @PostMapping("/create")
   public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
     if (bindingResult.hasErrors()) {
@@ -61,7 +61,7 @@ public class QuestionController {
     return "redirect:/question/list"; // 질문 저장후 질문목록으로 이동
   }
 
-  @PreAuthorize("isAuthenticated()")
+  @PreAuthorize("isAuthenticated()") // 로그인 한 사람만 가능
   @PostMapping("/modify/{id}")
   public String questionModify(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal,
       @PathVariable("id") Integer id) {
@@ -77,7 +77,7 @@ public class QuestionController {
     return String.format("redirect:/question/detail/%s", id);
   }
 
-  @PreAuthorize("isAuthenticated()")
+  @PreAuthorize("isAuthenticated()") // 로그인 한 사람만 가능
   @GetMapping("/delete/{id}")
   public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
 
@@ -87,6 +87,15 @@ public class QuestionController {
     }
     this.questionService.delete(question);
     return "redirect:/";
+  }
+
+  @PreAuthorize("isAuthenticated()") // 로그인 한 사람만 가능
+  @GetMapping("/vote/{id}")
+  public String questionVote(Principal principal, @PathVariable("id") Integer id) {
+      Question question = this.questionService.getQuestion(id);
+      SiteUser siteUser = this.userService.getUser(principal.getName());
+      this.questionService.vote(question, siteUser);
+      return String.format("redirect:/question/detail/%s", id);
   }
 
 }
