@@ -40,6 +40,9 @@ dependencies {
   // 마크 다운 // https://github.com/commonmark/commonmark-java -- 버전 체크 // https://www.markdownguide.org/getting-started -- 공식문서
   // 따로 이거만 버전이 필요한 이유: 스프링부트에서 자동으로 버전관리 해주는 패키지에 포함되지 않아서 주기적으로 최신 버전으로 유지 해줘야함
   implementation 'org.commonmark:commonmark:0.21.0'
+
+  // 메일 전송
+  implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {

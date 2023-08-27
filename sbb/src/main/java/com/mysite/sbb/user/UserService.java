@@ -9,7 +9,6 @@ import com.mysite.sbb.DataNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
-
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -26,8 +25,30 @@ public class UserService {
     return user;
   }
 
+  public void modify_pass(String email, String password) {
+    Optional<SiteUser> siteUser = this.userRepository.findByemail(email);
+    if (siteUser.isPresent()) {
+      SiteUser siteUsers = siteUser.get();
+      siteUsers.setPassword(passwordEncoder.encode(password));
+      this.userRepository.save(siteUsers);
+
+    } else {
+      throw new DataNotFoundException("siteuser not found");
+    }
+
+  }
+
   public SiteUser getUser(String username) {
     Optional<SiteUser> siteUser = this.userRepository.findByusername(username);
+    if (siteUser.isPresent()) {
+      return siteUser.get();
+    } else {
+      throw new DataNotFoundException("siteuser not found");
+    }
+  }
+
+  public SiteUser getUser_email(String email) {
+    Optional<SiteUser> siteUser = this.userRepository.findByemail(email);
     if (siteUser.isPresent()) {
       return siteUser.get();
     } else {
